@@ -14,6 +14,9 @@ namespace Verse
             Map map = Find.CurrentMap;
             if (map == null) return;
 
+            // Capture undo data before making changes
+            TerrainUndoSystem.CaptureBeforeAction(center, radius);
+
             // Calculate the search area bounds
             int searchRadius = Mathf.CeilToInt(radius);
             

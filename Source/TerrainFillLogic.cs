@@ -19,6 +19,9 @@ namespace Verse
             // Get all cells to fill
             List<IntVec3> cellsToFill = GetFillCells(startCell, originalTerrain, map);
 
+            // Capture undo data before making changes
+            TerrainUndoSystem.CaptureBeforeAction(cellsToFill);
+
             // Apply the terrain to all cells
             foreach (IntVec3 cell in cellsToFill)
             {

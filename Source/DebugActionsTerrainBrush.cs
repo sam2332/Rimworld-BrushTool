@@ -354,6 +354,30 @@ namespace Verse
             // Add the Fill Tools node to the main menu
             list.Add(fillToolsNode);
 
+            // Create parent node for Undo Tools
+            DebugActionNode undoToolsNode = new DebugActionNode("Undo Tools");
+            
+            // Add Undo Tool
+            undoToolsNode.AddChild(new DebugActionNode("Undo Last Action")
+            {
+                action = delegate
+                {
+                    TerrainUndoToolFactory.CreateUndoTool();
+                }
+            });
+
+            // Add Clear Undo History Tool
+            undoToolsNode.AddChild(new DebugActionNode("Clear Undo History")
+            {
+                action = delegate
+                {
+                    TerrainClearUndoToolFactory.CreateClearUndoTool();
+                }
+            });
+
+            // Add the Undo Tools node to the main menu
+            list.Add(undoToolsNode);
+
             return list;
         }
     }

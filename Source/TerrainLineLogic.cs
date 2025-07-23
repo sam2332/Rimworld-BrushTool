@@ -14,6 +14,9 @@ namespace Verse
             // Get all cells along the line using Bresenham's line algorithm
             List<IntVec3> lineCells = GetLineCells(start, end);
 
+            // Capture undo data before making changes
+            TerrainUndoSystem.CaptureBeforeAction(lineCells);
+
             // Paint terrain on all cells in the line
             foreach (IntVec3 cell in lineCells)
             {
