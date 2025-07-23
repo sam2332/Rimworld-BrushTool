@@ -15,48 +15,68 @@ namespace Verse
         private static TerrainDef currentTerrain = null;
         private static float currentBrushRadius = 0f;
         
-        
-        
-        [DebugAction("Map", "Terrain brush (single)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrushRadiusSingle()
+        [DebugAction("Map", "Brush Tool", false, false, false, false, false, 95, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static List<DebugActionNode> BrushToolMainMenu()
         {
-            return CreateTerrainBrushNodes(0f);
-        }
+            List<DebugActionNode> list = new List<DebugActionNode>();
 
-        [DebugAction("Map", "Terrain brush (radius 1)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrushRadius1()
-        {
-            return CreateTerrainBrushNodes(1.0f);
-        }
-        
-        [DebugAction("Map", "Terrain brush (radius 2)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrushRadius2()
-        {
-            return CreateTerrainBrushNodes(2.0f);
-        }
+            // Create parent node for Single cell brushes
+            DebugActionNode singleNode = new DebugActionNode("Single cell");
+            foreach (var terrain in CreateTerrainBrushNodes(0f))
+            {
+                singleNode.AddChild(terrain);
+            }
+            list.Add(singleNode);
 
-        [DebugAction("Map", "Terrain brush (radius 4)", false, false, false, false, false, 90, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrushRadius4()
-        {
-            return CreateTerrainBrushNodes(4.0f);
-        }
+            // Create parent node for Radius 1 brushes
+            DebugActionNode radius1Node = new DebugActionNode("Radius 1");
+            foreach (var terrain in CreateTerrainBrushNodes(1.0f))
+            {
+                radius1Node.AddChild(terrain);
+            }
+            list.Add(radius1Node);
 
-        [DebugAction("Map", "Terrain brush (radius 8)", false, false, false, false, false, 89, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrushRadius8()
-        {
-            return CreateTerrainBrushNodes(8.0f);
-        }
+            // Create parent node for Radius 2 brushes
+            DebugActionNode radius2Node = new DebugActionNode("Radius 2");
+            foreach (var terrain in CreateTerrainBrushNodes(2.0f))
+            {
+                radius2Node.AddChild(terrain);
+            }
+            list.Add(radius2Node);
 
-        [DebugAction("Map", "Terrain brush (radius 16)", false, false, false, false, false, 88, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrushRadius16()
-        {
-            return CreateTerrainBrushNodes(16.0f);
-        }
+            // Create parent node for Radius 4 brushes
+            DebugActionNode radius4Node = new DebugActionNode("Radius 4");
+            foreach (var terrain in CreateTerrainBrushNodes(4.0f))
+            {
+                radius4Node.AddChild(terrain);
+            }
+            list.Add(radius4Node);
 
-        [DebugAction("Map", "Terrain brush (radius 32)", false, false, false, false, false, 87, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrushRadius32()
-        {
-            return CreateTerrainBrushNodes(32.0f);
+            // Create parent node for Radius 8 brushes
+            DebugActionNode radius8Node = new DebugActionNode("Radius 8");
+            foreach (var terrain in CreateTerrainBrushNodes(8.0f))
+            {
+                radius8Node.AddChild(terrain);
+            }
+            list.Add(radius8Node);
+
+            // Create parent node for Radius 16 brushes
+            DebugActionNode radius16Node = new DebugActionNode("Radius 16");
+            foreach (var terrain in CreateTerrainBrushNodes(16.0f))
+            {
+                radius16Node.AddChild(terrain);
+            }
+            list.Add(radius16Node);
+
+            // Create parent node for Radius 32 brushes
+            DebugActionNode radius32Node = new DebugActionNode("Radius 32");
+            foreach (var terrain in CreateTerrainBrushNodes(32.0f))
+            {
+                radius32Node.AddChild(terrain);
+            }
+            list.Add(radius32Node);
+
+            return list;
         }
 
         private static List<DebugActionNode> CreateTerrainBrushNodes(float brushRadius)
@@ -155,19 +175,16 @@ namespace Verse
             Map map = Find.CurrentMap;
             if (map == null) return;
 
-            // Draw circles to represent the brush area - draw multiple circles for better visibility
-            Vector3 centerWorld = center.ToVector3Shifted();
-            
-            // Draw the outer circle
-            GenDraw.DrawCircleOutline(centerWorld, radius, SimpleColor.White);
-            
-            // Draw a smaller inner circle for better visibility
-            if (radius > 1f)
+            // For single cell (radius 0), just highlight the center cell
+            if (radius <= 0f)
             {
-                GenDraw.DrawCircleOutline(centerWorld, radius * 0.7f, SimpleColor.White);
+                Vector3 centerWorld = center.ToVector3Shifted();
+                Vector2 centerScreen = centerWorld.MapToUIPosition();
+                DevGUI.DrawBox(new Rect(centerScreen.x - 12f, centerScreen.y - 12f, 24f, 24f), 2);
+                return;
             }
-            
-            // Also draw individual cell previews for affected cells
+
+            // For circular brushes, draw individual cell previews
             int searchRadius = Mathf.CeilToInt(radius);
             for (int x = -searchRadius; x <= searchRadius; x++)
             {
@@ -179,9 +196,12 @@ namespace Verse
                     float distance = Mathf.Sqrt(x * x + z * z);
                     if (distance <= radius && cell.InBounds(map))
                     {
-                        // Draw a subtle highlight on each affected cell
-                        Vector3 cellCenter = cell.ToVector3Shifted();
-                        GenDraw.DrawTargetHighlight(new LocalTargetInfo(cell));
+                        // Draw a box for each affected cell using screen coordinates
+                        Vector3 cellWorld = cell.ToVector3Shifted();
+                        Vector2 cellScreen = cellWorld.MapToUIPosition();
+                        
+                        // Draw a small box at each cell position
+                        DevGUI.DrawBox(new Rect(cellScreen.x - 12f, cellScreen.y - 12f, 24f, 24f), 1);
                     }
                 }
             }
