@@ -75,72 +75,11 @@ namespace Verse
             list.Add(brushesNode);
 
             // Create parent node for Spray Paint containing all spray tools
-            DebugActionNode sprayNode = new DebugActionNode("Spray Paint (10%)");
+            DebugActionNode sprayPaintNode = new DebugActionNode("Spray Paint");
             
-            // Add all spray radius options under the Spray Paint submenu
-            // Create parent node for Single cell sprays
-            DebugActionNode spraySingleNode = new DebugActionNode("Single cell");
-            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(0f, 0.1f))
-            {
-                spraySingleNode.AddChild(terrain);
-            }
-            sprayNode.AddChild(spraySingleNode);
-
-            // Create parent node for Radius 1 sprays
-            DebugActionNode sprayRadius1Node = new DebugActionNode("Radius 1");
-            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(1.0f, 0.1f))
-            {
-                sprayRadius1Node.AddChild(terrain);
-            }
-            sprayNode.AddChild(sprayRadius1Node);
-
-            // Create parent node for Radius 2 sprays
-            DebugActionNode sprayRadius2Node = new DebugActionNode("Radius 2");
-            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(2.0f, 0.1f))
-            {
-                sprayRadius2Node.AddChild(terrain);
-            }
-            sprayNode.AddChild(sprayRadius2Node);
-
-            // Create parent node for Radius 4 sprays
-            DebugActionNode sprayRadius4Node = new DebugActionNode("Radius 4");
-            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(4.0f, 0.1f))
-            {
-                sprayRadius4Node.AddChild(terrain);
-            }
-            sprayNode.AddChild(sprayRadius4Node);
-
-            // Create parent node for Radius 8 sprays
-            DebugActionNode sprayRadius8Node = new DebugActionNode("Radius 8");
-            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(8.0f, 0.1f))
-            {
-                sprayRadius8Node.AddChild(terrain);
-            }
-            sprayNode.AddChild(sprayRadius8Node);
-
-            // Create parent node for Radius 16 sprays
-            DebugActionNode sprayRadius16Node = new DebugActionNode("Radius 16");
-            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(16.0f, 0.1f))
-            {
-                sprayRadius16Node.AddChild(terrain);
-            }
-            sprayNode.AddChild(sprayRadius16Node);
-
-            // Create parent node for Radius 32 sprays
-            DebugActionNode sprayRadius32Node = new DebugActionNode("Radius 32");
-            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(32.0f, 0.1f))
-            {
-                sprayRadius32Node.AddChild(terrain);
-            }
-            sprayNode.AddChild(sprayRadius32Node);
-
-            // Add the Spray Paint node to the main menu
-            list.Add(sprayNode);
-
-            // Create parent node for Light Spray Paint (5%) containing all spray tools
-            DebugActionNode lightSprayNode = new DebugActionNode("Light Spray Paint (5%)");
+            // Light Spray Paint (5%)
+            DebugActionNode lightSprayNode = new DebugActionNode("Light Spray (5%)");
             
-            // Add all light spray radius options under the Light Spray Paint submenu
             // Create parent node for Single cell light sprays
             DebugActionNode lightSpraySingleNode = new DebugActionNode("Single cell");
             foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(0f, 0.05f))
@@ -197,13 +136,72 @@ namespace Verse
             }
             lightSprayNode.AddChild(lightSprayRadius32Node);
 
-            // Add the Light Spray Paint node to the main menu
-            list.Add(lightSprayNode);
+            sprayPaintNode.AddChild(lightSprayNode);
 
-            // Create parent node for Heavy Spray Paint (20%) containing all spray tools
-            DebugActionNode heavySprayNode = new DebugActionNode("Heavy Spray Paint (20%)");
+            // Medium Spray Paint (10%)
+            DebugActionNode mediumSprayNode = new DebugActionNode("Medium Spray (10%)");
             
-            // Add all heavy spray radius options under the Heavy Spray Paint submenu
+            // Create parent node for Single cell medium sprays
+            DebugActionNode mediumSpraySingleNode = new DebugActionNode("Single cell");
+            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(0f, 0.1f))
+            {
+                mediumSpraySingleNode.AddChild(terrain);
+            }
+            mediumSprayNode.AddChild(mediumSpraySingleNode);
+
+            // Create parent node for Radius 1 medium sprays
+            DebugActionNode mediumSprayRadius1Node = new DebugActionNode("Radius 1");
+            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(1.0f, 0.1f))
+            {
+                mediumSprayRadius1Node.AddChild(terrain);
+            }
+            mediumSprayNode.AddChild(mediumSprayRadius1Node);
+
+            // Create parent node for Radius 2 medium sprays
+            DebugActionNode mediumSprayRadius2Node = new DebugActionNode("Radius 2");
+            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(2.0f, 0.1f))
+            {
+                mediumSprayRadius2Node.AddChild(terrain);
+            }
+            mediumSprayNode.AddChild(mediumSprayRadius2Node);
+
+            // Create parent node for Radius 4 medium sprays
+            DebugActionNode mediumSprayRadius4Node = new DebugActionNode("Radius 4");
+            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(4.0f, 0.1f))
+            {
+                mediumSprayRadius4Node.AddChild(terrain);
+            }
+            mediumSprayNode.AddChild(mediumSprayRadius4Node);
+
+            // Create parent node for Radius 8 medium sprays
+            DebugActionNode mediumSprayRadius8Node = new DebugActionNode("Radius 8");
+            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(8.0f, 0.1f))
+            {
+                mediumSprayRadius8Node.AddChild(terrain);
+            }
+            mediumSprayNode.AddChild(mediumSprayRadius8Node);
+
+            // Create parent node for Radius 16 medium sprays
+            DebugActionNode mediumSprayRadius16Node = new DebugActionNode("Radius 16");
+            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(16.0f, 0.1f))
+            {
+                mediumSprayRadius16Node.AddChild(terrain);
+            }
+            mediumSprayNode.AddChild(mediumSprayRadius16Node);
+
+            // Create parent node for Radius 32 medium sprays
+            DebugActionNode mediumSprayRadius32Node = new DebugActionNode("Radius 32");
+            foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(32.0f, 0.1f))
+            {
+                mediumSprayRadius32Node.AddChild(terrain);
+            }
+            mediumSprayNode.AddChild(mediumSprayRadius32Node);
+
+            sprayPaintNode.AddChild(mediumSprayNode);
+
+            // Heavy Spray Paint (20%)
+            DebugActionNode heavySprayNode = new DebugActionNode("Heavy Spray (20%)");
+            
             // Create parent node for Single cell heavy sprays
             DebugActionNode heavySpraySingleNode = new DebugActionNode("Single cell");
             foreach (var terrain in TerrainSprayNodeFactory.CreateTerrainSprayNodes(0f, 0.2f))
@@ -260,8 +258,10 @@ namespace Verse
             }
             heavySprayNode.AddChild(heavySprayRadius32Node);
 
-            // Add the Heavy Spray Paint node to the main menu
-            list.Add(heavySprayNode);
+            sprayPaintNode.AddChild(heavySprayNode);
+
+            // Add the Spray Paint node to the main menu
+            list.Add(sprayPaintNode);
 
             // Create parent node for Edge Blender tools
             DebugActionNode edgeBlenderNode = new DebugActionNode("Edge Blender Tools");
@@ -353,6 +353,18 @@ namespace Verse
 
             // Add the Fill Tools node to the main menu
             list.Add(fillToolsNode);
+
+            // Create parent node for Rectangle Tools
+            DebugActionNode rectToolsNode = new DebugActionNode("Rectangle Tools");
+            
+            // Add all terrain rectangle tools
+            foreach (var rectTool in TerrainRectNodeFactory.CreateTerrainRectNodes())
+            {
+                rectToolsNode.AddChild(rectTool);
+            }
+
+            // Add the Rectangle Tools node to the main menu
+            list.Add(rectToolsNode);
 
             // Create parent node for Undo Tools
             DebugActionNode undoToolsNode = new DebugActionNode("Undo Tools");

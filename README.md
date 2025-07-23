@@ -1,6 +1,6 @@
 # Quick Paint Terrain Brush Dev Tool
 
-A comprehensive terrain painting toolkit for RimWorld map designers and developers. This mod provides advanced terrain painting tools including circular brushes, spray paint functionality, edge blending, line drawing, and flood fill capabilities for creating natural, varied terrain patterns.
+A comprehensive terrain painting toolkit for RimWorld map designers and developers. This mod provides advanced terrain painting tools including circular brushes, spray paint functionality, edge blending, line drawing, rectangle tools, and flood fill capabilities for creating natural, varied terrain patterns.
 
 ## Features Overview
 
@@ -12,9 +12,10 @@ A comprehensive terrain painting toolkit for RimWorld map designers and develope
 
 ### 🌿 **Spray Paint Tools** - Natural Terrain Variation
 - **Light Spray Paint (5%)**: Ultra-sparse coverage for subtle terrain hints
-- **Spray Paint (10%)**: Medium sparse coverage for natural terrain mixing  
+- **Medium Spray Paint (10%)**: Medium sparse coverage for natural terrain mixing  
 - **Heavy Spray Paint (20%)**: Dense coverage for strong terrain variation
 - **Randomized application** creates realistic, organic terrain patterns
+- **All radius sizes supported**: Single cell through radius 32 for each intensity level
 
 ### 🌅 **Edge Blender Tools** - Intelligent Terrain Transitions
 - **Smart boundary detection** automatically finds terrain edges
@@ -27,6 +28,13 @@ A comprehensive terrain painting toolkit for RimWorld map designers and develope
 - **All terrain types** supported with dedicated menu per terrain
 - **Perfect straight lines** using Bresenham line algorithm
 - **Visual preview** shows line path before confirming
+
+### ⬜ **Rectangle Tools** - Geometric Terrain Areas
+- **Filled Rectangles**: Complete area coverage for rooms, courtyards, and foundations
+- **Border-Only Rectangles**: Perimeter-only coverage for walls, fences, and outlines
+- **Two-click interface**: Set opposite corners to define rectangle area
+- **Visual preview** distinguishes between filled and border modes
+- **All terrain types** supported for both filled and border variants
 
 ### 🪣 **Fill Tools** - Flood Fill Connected Areas
 - **Smart flood fill** changes all connected cells of the same terrain type
@@ -48,18 +56,29 @@ Terrain Painter
 │   ├── Radius 8 → [All terrain types]
 │   ├── Radius 16 → [All terrain types]
 │   └── Radius 32 → [All terrain types]
-├── Light Spray Paint (5%)
-│   ├── Single cell → [All terrain types]
-│   ├── Radius 1 → [All terrain types]
-│   └── [...] → [All terrain types]
-├── Spray Paint (10%)
-├── Heavy Spray Paint (20%)
+├── Spray Paint
+│   ├── Light Spray (5%)
+│   │   ├── Single cell → [All terrain types]
+│   │   ├── Radius 1 → [All terrain types]
+│   │   └── [...] → [All terrain types]
+│   ├── Medium Spray (10%)
+│   │   ├── Single cell → [All terrain types]
+│   │   └── [...] → [All terrain types]
+│   └── Heavy Spray (20%)
+│       ├── Single cell → [All terrain types]
+│       └── [...] → [All terrain types]
 ├── Edge Blender Tools
 │   ├── Light Blend (10%) → Radius 1, 2, 4, 8
 │   ├── Medium Blend (30%) → Radius 1, 2, 4, 8
 │   └── Heavy Blend (60%) → Radius 1, 2, 4, 8
 ├── Line Tools → [All terrain types]
-└── Fill Tools → [All terrain types]
+├── Fill Tools → [All terrain types]
+├── Rectangle Tools
+│   ├── Filled Rectangles → [All terrain types]
+│   └── Border Only Rectangles → [All terrain types]
+└── Undo Tools
+    ├── Undo Last Action
+    └── Clear Undo History
 ```
 
 ## Usage Guide
@@ -91,6 +110,16 @@ Terrain Painter
 4. **Click second point** to set line end and draw the terrain line
 5. **Right-click** to cancel before setting the second point
 
+### Using Rectangle Tools
+1. Navigate to **Rectangle Tools**
+2. **Choose rectangle type**: 
+   - **Filled Rectangles** for complete area coverage
+   - **Border Only Rectangles** for perimeter-only placement
+3. **Select terrain type** from the submenu
+4. **Click first corner** on the map to set rectangle start
+5. **Click opposite corner** to define the rectangle and apply terrain
+6. **Right-click** to cancel before setting the second corner
+
 ### Using Fill Tools
 1. Navigate to **Fill Tools**
 2. **Select terrain type** you want to fill with
@@ -102,10 +131,13 @@ Terrain Painter
 - **Spray tools** create more natural, varied terrain than solid brushes
 - **Edge blenders** work best on existing terrain boundaries for smooth transitions
 - **Line tools** are perfect for roads, rivers, or geometric terrain features
+- **Rectangle tools** excel at creating rooms, foundations, walls, and geometric areas
 - **Fill tools** excel at replacing large uniform areas quickly
 - **Combine tools** for complex terrain design (e.g., brush base terrain, spray variations, blend edges)
 - **Use smaller brushes** for detail work, larger for broad coverage
 - **Preview systems** help visualize changes before applying
+- **Filled rectangles** are ideal for floors, courtyards, and area coverage
+- **Border rectangles** are perfect for walls, fences, and outlines
 
 ## Technical Features
 

@@ -5,54 +5,22 @@
     <supportedVersions>
         <li>1.6</li>
     </supportedVersions>
-    <modVersion>2.2.0</modVersion>
+    <modVersion>2.2.2</modVersion>
     <packageId>BrushTool.programmerLily.com</packageId>
     <modDependencies>
     </modDependencies>
-    <description>Comprehensive terrain painting toolkit for RimWorld map designers and developers. Includes both solid brushes and spray paint tools for creating natural, varied terrain patterns.
+    <description>Comprehensive terrain painting toolkit for RimWorld map designers and developers. Features circular brushes, spray paint tools, edge blending, line drawing, rectangle tools, and flood fill for creating natural, varied terrain patterns.
 
-This mod provides advanced terrain painting tools with circular brushes and spray functionality. Perfect for rapid terrain prototyping, map design, and creating realistic terrain transitions.
+🎨 Circular Brushes: Seven sizes from single cell to radius 32 with paint-while-dragging
+🌿 Spray Paint Tools: Three coverage levels (5%, 10%, 20%) for natural terrain variation
+🌅 Edge Blender Tools: Smart terrain transition blending with multiple strengths and radii
+📏 Line Tools: Two-click precision terrain drawing with visual preview
+⬜ Rectangle Tools: Filled and border-only rectangles with two-click corner selection
+🪣 Fill Tools: Flood fill connected areas with performance safeguards (10,000 cell limit)
+↩️ Undo System: Multi-level undo for terrain modifications
 
-Features:
-• Circular Brushes: Single cell, radius 1, 2, 4, 8, 16, and 32
-• Spray Paint Tools: 5%, 10%, and 20% coverage for varied terrain patterns
-• Edge Blender Tools: Smart terrain transition blending with light, medium, and heavy strength options
-• Line Tools: Draw straight terrain lines between two points with precision
-• Fill Tools: Flood fill connected terrain areas with smart preview limits
-• Undo System: Multi-level undo for the last 15 terrain modification actions
-• Paint-while-dragging: Hold and drag to paint continuously (brushes and sprays)
-• Visual preview: See brush areas, line previews, and fill areas under mouse cursor
-• All terrain types supported through intuitive submenus
-• Integrated into Debug Menu under "Terrain Painter" category
+Access through Debug Menu → "Terrain Painter". All tools support every terrain type through organized submenus. Perfect for rapid prototyping, map design, and creating realistic terrain transitions.
 
-Tools Available:
-• Brushes: Full coverage circular painting tools for solid terrain areas
-• Light Spray Paint (5%): Ultra-sparse coverage for subtle terrain hints and transitions
-• Spray Paint (10%): Medium sparse coverage for natural terrain mixing
-• Heavy Spray Paint (20%): Dense coverage for strong terrain variation and blending
-• Edge Blender Tools: Intelligent terrain boundary smoothing with configurable blend strength
-• Line Tools: Precise straight-line terrain drawing with two-click interface
-• Fill Tools: Flood fill connected areas of the same terrain type (max 10,000 cells)
-• Undo Last Action: Multi-level undo for the most recent terrain modifications (up to 15 states)
-• Clear Undo History: Remove all undo data to free memory
-
-Usage:
-1. Open the Debug Menu (Development mode required)
-2. Search for "Terrain Painter" in the Actions/tools
-3. Choose tool type: 
-   - "Brushes" for solid coverage
-   - "Light Spray Paint (5%)" for ultra-sparse coverage
-   - "Spray Paint (10%)" for medium sparse coverage
-   - "Heavy Spray Paint (20%)" for dense coverage
-   - "Edge Blender Tools" for intelligent terrain boundary smoothing
-   - "Line Tools" for precise straight-line terrain drawing
-   - "Fill Tools" for flood filling connected terrain areas
-   - "Undo Tools" containing undo and clear history options
-4. Select desired radius/blend strength, or choose terrain type for line/fill tools
-5. For brushes/sprays: Choose terrain type from submenu, then click and drag
-6. For line tools: Click to set start point, then click again to set end point and draw line
-7. For fill tools: Click on any terrain area to flood fill all connected cells of the same type
-
-The spray paint tools apply terrain randomly to a percentage of cells within the brush radius. Fill tools use flood fill algorithm to change all connected cells of the same terrain type (limited to 10,000 cells for performance). Preview is shown for areas under 500 cells to keep visualization responsive. Line tools use a two-click interface for precise straight-line drawing. The Edge Blender tools automatically detect terrain boundaries and create smooth transitions by intelligently blending different terrain types based on surrounding context. The Undo system maintains a history of the last 15 terrain modifications and allows step-by-step restoration to previous states.</description>
+Development mode required for access to debug tools.</description>
 <url>https://github.com/sam2332/Rimworld-BrushTool</url>
 </ModMetaData>
