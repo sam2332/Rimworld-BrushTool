@@ -6,6 +6,7 @@
     <OutputPath>../Assemblies/</OutputPath>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <LangVersion>latest</LangVersion>
+    <AssemblyName>brushtool</AssemblyName>
   </PropertyGroup>
   
   <ItemGroup>
