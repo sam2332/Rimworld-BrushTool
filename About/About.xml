@@ -17,8 +17,10 @@ Features:
 • Circular Brushes: Single cell, radius 1, 2, 4, 8, 16, and 32
 • Spray Paint Tools: 5%, 10%, and 20% coverage for varied terrain patterns
 • Edge Blender Tools: Smart terrain transition blending with light, medium, and heavy strength options
-• Paint-while-dragging: Hold and drag to paint continuously
-• Visual brush preview under mouse cursor
+• Line Tools: Draw straight terrain lines between two points with precision
+• Fill Tools: Flood fill connected terrain areas with smart preview limits
+• Paint-while-dragging: Hold and drag to paint continuously (brushes and sprays)
+• Visual preview: See brush areas, line previews, and fill areas under mouse cursor
 • All terrain types supported through intuitive submenus
 • Integrated into Debug Menu under "Terrain Painter" category
 
@@ -28,6 +30,8 @@ Tools Available:
 • Spray Paint (10%): Medium sparse coverage for natural terrain mixing
 • Heavy Spray Paint (20%): Dense coverage for strong terrain variation and blending
 • Edge Blender Tools: Intelligent terrain boundary smoothing with configurable blend strength
+• Line Tools: Precise straight-line terrain drawing with two-click interface
+• Fill Tools: Flood fill connected areas of the same terrain type (max 10,000 cells)
 
 Usage:
 1. Open the Debug Menu (Development mode required)
@@ -38,9 +42,12 @@ Usage:
    - "Spray Paint (10%)" for medium sparse coverage
    - "Heavy Spray Paint (20%)" for dense coverage
    - "Edge Blender Tools" for intelligent terrain boundary smoothing
-4. Select desired radius and/or blend strength
-5. Choose terrain type from submenu (for brush/spray tools)
-6. Click and drag on map to paint terrain
+   - "Line Tools" for precise straight-line terrain drawing
+   - "Fill Tools" for flood filling connected terrain areas
+4. Select desired radius/blend strength, or choose terrain type for line/fill tools
+5. For brushes/sprays: Choose terrain type from submenu, then click and drag
+6. For line tools: Click to set start point, then click again to set end point and draw line
+7. For fill tools: Click on any terrain area to flood fill all connected cells of the same type
 
-The spray paint tools apply terrain randomly to a percentage of cells within the brush radius: 5% for subtle hints, 10% for natural mixing, and 20% for strong variation. The Edge Blender tools automatically detect terrain boundaries and create smooth transitions by intelligently blending different terrain types based on surrounding context.</description>
+The spray paint tools apply terrain randomly to a percentage of cells within the brush radius. Fill tools use flood fill algorithm to change all connected cells of the same terrain type (limited to 10,000 cells for performance). Preview is shown for areas under 500 cells to keep visualization responsive. Line tools use a two-click interface for precise straight-line drawing. The Edge Blender tools automatically detect terrain boundaries and create smooth transitions by intelligently blending different terrain types based on surrounding context.</description>
 </ModMetaData>

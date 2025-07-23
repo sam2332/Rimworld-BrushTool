@@ -330,6 +330,30 @@ namespace Verse
             // Add the Edge Blender node to the main menu
             list.Add(edgeBlenderNode);
 
+            // Create parent node for Line Tools
+            DebugActionNode lineToolsNode = new DebugActionNode("Line Tools");
+            
+            // Add all terrain line tools
+            foreach (var lineTool in TerrainLineNodeFactory.CreateTerrainLineNodes())
+            {
+                lineToolsNode.AddChild(lineTool);
+            }
+
+            // Add the Line Tools node to the main menu
+            list.Add(lineToolsNode);
+
+            // Create parent node for Fill Tools
+            DebugActionNode fillToolsNode = new DebugActionNode("Fill Tools");
+            
+            // Add all terrain fill tools
+            foreach (var fillTool in TerrainFillNodeFactory.CreateTerrainFillNodes())
+            {
+                fillToolsNode.AddChild(fillTool);
+            }
+
+            // Add the Fill Tools node to the main menu
+            list.Add(fillToolsNode);
+
             return list;
         }
     }
