@@ -1,50 +1,46 @@
-# Quick Terrain Brush Tool - RimWorld Mod
+# Quick Terrain Brush Tool
 
-**STATUS: ✅ COMPLETED**
+This mod adds five developer brush tools to the Dev Palette for rapid terrain painting in RimWorld.
 
-This mod adds five developer brush tools to RimWorld's Dev Palette that apply terrain in square areas of fixed size (4×4, 8×8, 16×16, 32×32, 64×64).
+## Features
 
-## Implementation Summary
-
-✅ **Core Features Implemented:**
-- Five brush sizes: 4x4, 8x8, 16x16, 32x32, 64x64
-- Terrain type selection with caching across brush sizes
-- Visual brush preview under mouse cursor
-- Integration with RimWorld's debug action system
-- Reuses existing terrain rectangle tool logic
-
-✅ **Technical Details:**
-- Uses `DebugAction` attributes for registration in Dev Palette
-- Leverages `DebugTool` class for mouse interaction and preview rendering
-- Implements cached terrain selection pattern
-- Square brush painting centered on clicked cell
-- Proper map bounds checking and terrain validation
-
-## Files Created
-
-- `Source/DebugActionsTerrainBrush.cs` - Main implementation
-- `About/About.xml` - Mod metadata
-- `Assemblies/BrushTool.dll` - Compiled mod assembly
-- `README_MOD.md` - User documentation
-
-## Build Process
-
-Use the provided `compile.bat` script:
-```bash
-./compile.bat
-```
-
-This will:
-1. Build the project with dotnet
-2. Rename the output DLL to BrushTool.dll
+- **Five brush sizes**: 4×4, 8×8, 16×16, 32×32, 64×64
+- **Cached terrain selection**: Choose a terrain type once and use it across all brush sizes
+- **Visual preview**: See the brush area highlighted under your mouse cursor
+- **Integrated workflow**: Uses the same terrain selection UI as the existing rectangle tool
 
 ## Usage
 
-1. Enable Development Mode in RimWorld
-2. Open Debug Menu (F12)
-3. Navigate to "Terrain" category
-4. Select desired brush size
-5. Choose terrain type
-6. Click on map to paint
+1. **Enable Development Mode** in RimWorld options
+2. **Open Debug Menu** (usually F12 or the debug icon)
+3. **Navigate to "Terrain" category** in the debug actions
+4. **Select desired brush size**:
+   - "Terrain Brush (4x4)"
+   - "Terrain Brush (8x8)" 
+   - "Terrain Brush (16x16)"
+   - "Terrain Brush (32x32)"
+   - "Terrain Brush (64x64)"
+5. **Choose terrain type** from the menu (if not already cached)
+6. **Click on the map** to paint terrain with the selected brush
 
-The mod is ready for use and testing in RimWorld!
+## Tips
+
+- The terrain selection is **remembered across all brush sizes** until you clear it or change it
+- Use **"Clear cached terrain"** action to reset your terrain selection
+- **Right-click** while using a brush tool to cancel it
+- The brush preview shows exactly where terrain will be painted
+- All brushes paint in perfect squares centered on the clicked cell
+
+## Technical Details
+
+- Reuses existing game logic from the terrain rectangle tool
+- Uses the same terrain validation and map bounds checking
+- Integrates seamlessly with RimWorld's debug action system
+- No conflicts with existing terrain tools
+
+## Installation
+
+1. Copy the mod folder to your RimWorld Mods directory
+2. Enable the mod in the mod manager
+3. Restart RimWorld if needed
+4. Enable Development Mode in options to access the tools
