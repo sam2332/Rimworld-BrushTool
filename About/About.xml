@@ -9,23 +9,22 @@
     <packageId>BrushTool.programmerLily.com</packageId>
     <modDependencies>
     </modDependencies>
-    <description>Adds five developer brush tools to the Dev Palette that apply terrain in square areas of fixed size (4×4, 8×8, 16×16, 32×32, 64×64).
+    <description>Adds five developer brush tools to the Debug Menu that apply terrain in square areas of fixed size (4×4, 8×8, 16×16, 32×32, 64×64).
 
 This mod extends the existing terrain rectangle tool with preset square brushes centered on the clicked tile. Perfect for rapid terrain prototyping and map design.
 
 Features:
 • Five brush sizes: 4x4, 8x8, 16x16, 32x32, 64x64
-• Reuses existing terrain selection UI
-• Cached terrain selection across brush sizes
+• Uses existing terrain selection UI for each brush size
 • Visual brush preview under mouse cursor
-• Integrated into Dev Palette under "Terrain" category
+• Integrated into Debug Menu under "Map" category
 
 Usage:
 1. Open the Debug Menu (Development mode required)
-2. Navigate to Terrain category
-3. Select desired brush size
-4. Choose terrain type (cached for subsequent uses)
-5. Click on map to paint terrain
+2. Navigate to Actions/tools tab → Map category
+3. Select desired brush size (e.g., "Terrain brush (16x16)")
+4. Choose terrain type from the submenu
+5. Click on map to paint terrain with the brush
 
-The terrain selection is remembered across all brush sizes until cleared or changed, making it easy to paint with different sizes using the same terrain type.</description>
+Each brush size opens a submenu with all available terrain types. Select the terrain you want to paint with and the brush tool will activate, showing a preview under your mouse cursor.</description>
 </ModMetaData>
