@@ -9,6 +9,11 @@ namespace Verse
 {
     public static class DebugActionsTerrainBrush
     {
+        // State tracking for paint-while-dragging
+        private static bool isPainting = false;
+        private static IntVec3 lastPaintedCell = IntVec3.Invalid;
+        private static TerrainDef currentTerrain = null;
+        private static int currentBrushSize = 0;
         [DebugAction("Map", "Terrain brush (4x4)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static List<DebugActionNode> TerrainBrush4x4()
         {
@@ -67,17 +72,41 @@ namespace Verse
 
         private static void CreateBrushToolForTerrain(TerrainDef terrain, int brushSize)
         {
-            // Create the brush tool using the same pattern as DebugToolsGeneral.GenericRectTool
+            // Store current tool settings for dragging
+            currentTerrain = terrain;
+            currentBrushSize = brushSize;
+            
+            // Create the brush tool with paint-while-dragging functionality
             string toolLabel = $"{terrain.LabelCap} brush ({brushSize}x{brushSize})";
             
             DebugTools.curTool = new DebugTool(toolLabel, delegate
             {
+                // On click, start painting and paint the initial cell
                 IntVec3 clickedCell = UI.MouseCell();
+                isPainting = true;
+                lastPaintedCell = clickedCell;
                 ApplyTerrainBrush(clickedCell, terrain, brushSize);
             }, delegate
             {
-                // Render brush preview
-                RenderBrushPreview(UI.MouseCell(), brushSize);
+                // On mouse over (called every frame while tool is active)
+                IntVec3 currentCell = UI.MouseCell();
+                
+                // Handle mouse release - stop painting
+                if (isPainting && !UnityEngine.Input.GetMouseButton(0))
+                {
+                    isPainting = false;
+                    lastPaintedCell = IntVec3.Invalid;
+                }
+                
+                // Handle painting while dragging
+                if (isPainting && UnityEngine.Input.GetMouseButton(0) && currentCell != lastPaintedCell)
+                {
+                    ApplyTerrainBrush(currentCell, terrain, brushSize);
+                    lastPaintedCell = currentCell;
+                }
+                
+                // Always render brush preview
+                RenderBrushPreview(currentCell, brushSize);
             });
         }
 
