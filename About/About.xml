@@ -15,7 +15,8 @@ This mod provides advanced terrain painting tools with circular brushes and spra
 
 Features:
 • Circular Brushes: Single cell, radius 1, 2, 4, 8, 16, and 32
-• Spray Paint Tools: 10% coverage for natural, scattered terrain patterns
+• Spray Paint Tools: 5%, 10%, and 20% coverage for varied terrain patterns
+• Edge Blender Tools: Smart terrain transition blending with light, medium, and heavy strength options
 • Paint-while-dragging: Hold and drag to paint continuously
 • Visual brush preview under mouse cursor
 • All terrain types supported through intuitive submenus
@@ -23,15 +24,23 @@ Features:
 
 Tools Available:
 • Brushes: Full coverage circular painting tools for solid terrain areas
-• Spray Paint (10%): Sparse coverage tools for natural terrain mixing and transitions
+• Light Spray Paint (5%): Ultra-sparse coverage for subtle terrain hints and transitions
+• Spray Paint (10%): Medium sparse coverage for natural terrain mixing
+• Heavy Spray Paint (20%): Dense coverage for strong terrain variation and blending
+• Edge Blender Tools: Intelligent terrain boundary smoothing with configurable blend strength
 
 Usage:
 1. Open the Debug Menu (Development mode required)
 2. Search for "Terrain Painter" in the Actions/tools
-3. Choose tool type: "Brushes" for solid coverage or "Spray Paint (10%)" for sparse coverage
-4. Select desired radius (Single cell through Radius 32)
-5. Choose terrain type from the submenu
+3. Choose tool type: 
+   - "Brushes" for solid coverage
+   - "Light Spray Paint (5%)" for ultra-sparse coverage
+   - "Spray Paint (10%)" for medium sparse coverage
+   - "Heavy Spray Paint (20%)" for dense coverage
+   - "Edge Blender Tools" for intelligent terrain boundary smoothing
+4. Select desired radius and/or blend strength
+5. Choose terrain type from submenu (for brush/spray tools)
 6. Click and drag on map to paint terrain
 
-The spray paint tools apply terrain randomly to only 10% of cells within the brush radius, creating natural, scattered patterns perfect for mixing terrain types or creating realistic transitions between different ground types.</description>
+The spray paint tools apply terrain randomly to a percentage of cells within the brush radius: 5% for subtle hints, 10% for natural mixing, and 20% for strong variation. The Edge Blender tools automatically detect terrain boundaries and create smooth transitions by intelligently blending different terrain types based on surrounding context.</description>
 </ModMetaData>
