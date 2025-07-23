@@ -13,38 +13,39 @@ namespace Verse
         private static bool isPainting = false;
         private static IntVec3 lastPaintedCell = IntVec3.Invalid;
         private static TerrainDef currentTerrain = null;
-        private static int currentBrushSize = 0;
-        [DebugAction("Map", "Terrain brush (4x4)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrush4x4()
+        private static float currentBrushRadius = 0f;
+        
+        [DebugAction("Map", "Terrain brush (radius 2)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static List<DebugActionNode> TerrainBrushRadius2()
         {
-            return CreateTerrainBrushNodes(4);
+            return CreateTerrainBrushNodes(2.0f);
         }
 
-        [DebugAction("Map", "Terrain brush (8x8)", false, false, false, false, false, 90, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrush8x8()
+        [DebugAction("Map", "Terrain brush (radius 4)", false, false, false, false, false, 90, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static List<DebugActionNode> TerrainBrushRadius4()
         {
-            return CreateTerrainBrushNodes(8);
+            return CreateTerrainBrushNodes(4.0f);
         }
 
-        [DebugAction("Map", "Terrain brush (16x16)", false, false, false, false, false, 89, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrush16x16()
+        [DebugAction("Map", "Terrain brush (radius 8)", false, false, false, false, false, 89, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static List<DebugActionNode> TerrainBrushRadius8()
         {
-            return CreateTerrainBrushNodes(16);
+            return CreateTerrainBrushNodes(8.0f);
         }
 
-        [DebugAction("Map", "Terrain brush (32x32)", false, false, false, false, false, 88, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrush32x32()
+        [DebugAction("Map", "Terrain brush (radius 16)", false, false, false, false, false, 88, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static List<DebugActionNode> TerrainBrushRadius16()
         {
-            return CreateTerrainBrushNodes(32);
+            return CreateTerrainBrushNodes(16.0f);
         }
 
-        [DebugAction("Map", "Terrain brush (64x64)", false, false, false, false, false, 87, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static List<DebugActionNode> TerrainBrush64x64()
+        [DebugAction("Map", "Terrain brush (radius 32)", false, false, false, false, false, 87, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static List<DebugActionNode> TerrainBrushRadius32()
         {
-            return CreateTerrainBrushNodes(64);
+            return CreateTerrainBrushNodes(32.0f);
         }
 
-        private static List<DebugActionNode> CreateTerrainBrushNodes(int brushSize)
+        private static List<DebugActionNode> CreateTerrainBrushNodes(float brushRadius)
         {
             List<DebugActionNode> list = new List<DebugActionNode>();
 
@@ -56,13 +57,13 @@ namespace Verse
             foreach (TerrainDef terrain in terrains)
             {
                 TerrainDef localTerrain = terrain;
-                int localBrushSize = brushSize;
+                float localBrushRadius = brushRadius;
                 
                 list.Add(new DebugActionNode(localTerrain.LabelCap)
                 {
                     action = delegate
                     {
-                        CreateBrushToolForTerrain(localTerrain, localBrushSize);
+                        CreateBrushToolForTerrain(localTerrain, localBrushRadius);
                     }
                 });
             }
@@ -70,14 +71,14 @@ namespace Verse
             return list;
         }
 
-        private static void CreateBrushToolForTerrain(TerrainDef terrain, int brushSize)
+        private static void CreateBrushToolForTerrain(TerrainDef terrain, float brushRadius)
         {
             // Store current tool settings for dragging
             currentTerrain = terrain;
-            currentBrushSize = brushSize;
+            currentBrushRadius = brushRadius;
             
             // Create the brush tool with paint-while-dragging functionality
-            string toolLabel = $"{terrain.LabelCap} brush ({brushSize}x{brushSize})";
+            string toolLabel = $"{terrain.LabelCap} brush (radius {brushRadius})";
             
             DebugTools.curTool = new DebugTool(toolLabel, delegate
             {
@@ -85,7 +86,7 @@ namespace Verse
                 IntVec3 clickedCell = UI.MouseCell();
                 isPainting = true;
                 lastPaintedCell = clickedCell;
-                ApplyTerrainBrush(clickedCell, terrain, brushSize);
+                ApplyTerrainBrush(clickedCell, terrain, brushRadius);
             }, delegate
             {
                 // On mouse over (called every frame while tool is active)
@@ -101,29 +102,33 @@ namespace Verse
                 // Handle painting while dragging
                 if (isPainting && UnityEngine.Input.GetMouseButton(0) && currentCell != lastPaintedCell)
                 {
-                    ApplyTerrainBrush(currentCell, terrain, brushSize);
+                    ApplyTerrainBrush(currentCell, terrain, brushRadius);
                     lastPaintedCell = currentCell;
                 }
                 
                 // Always render brush preview
-                RenderBrushPreview(currentCell, brushSize);
+                RenderBrushPreview(currentCell, brushRadius);
             });
         }
 
-        private static void ApplyTerrainBrush(IntVec3 center, TerrainDef terrain, int brushSize)
+        private static void ApplyTerrainBrush(IntVec3 center, TerrainDef terrain, float radius)
         {
             Map map = Find.CurrentMap;
             if (map == null) return;
 
-            int half = brushSize / 2;
-
-            // Paint terrain in a square pattern centered on the clicked cell
-            for (int x = -half; x < half; x++)
+            // Calculate the search area bounds
+            int searchRadius = Mathf.CeilToInt(radius);
+            
+            // Paint terrain in a circular pattern centered on the clicked cell
+            for (int x = -searchRadius; x <= searchRadius; x++)
             {
-                for (int z = -half; z < half; z++)
+                for (int z = -searchRadius; z <= searchRadius; z++)
                 {
                     IntVec3 cell = center + new IntVec3(x, 0, z);
-                    if (cell.InBounds(map))
+                    
+                    // Check if the cell is within the circular radius
+                    float distance = Mathf.Sqrt(x * x + z * z);
+                    if (distance <= radius && cell.InBounds(map))
                     {
                         map.terrainGrid.SetTerrain(cell, terrain);
                     }
@@ -131,46 +136,41 @@ namespace Verse
             }
         }
 
-        private static void RenderBrushPreview(IntVec3 center, int brushSize)
+        private static void RenderBrushPreview(IntVec3 center, float radius)
         {
             Map map = Find.CurrentMap;
             if (map == null) return;
 
-            int half = brushSize / 2;
-
-            // Calculate the bounds of the brush area
-            IntVec3 min = center + new IntVec3(-half, 0, -half);
-            IntVec3 max = center + new IntVec3(half - 1, 0, half - 1);
-
-            // Clamp to map bounds
-            min = min.ClampInsideMap(map);
-            max = max.ClampInsideMap(map);
-
-            // Create a CellRect for the brush area
-            CellRect brushRect = new CellRect(min.x, min.z, max.x - min.x + 1, max.z - min.z + 1);
-
-            // Draw the brush preview using the same rendering as the rectangle tool
-            Vector3 v1 = new Vector3(brushRect.minX - 0.5f, 0f, brushRect.minZ - 0.5f);
-            Vector3 v2 = new Vector3(brushRect.maxX + 0.5f, 0f, brushRect.maxZ + 0.5f);
-
-            Vector2 screenPos1 = v1.MapToUIPosition();
-            Vector2 screenPos2 = v2.MapToUIPosition();
-
-            // Draw semi-transparent overlay
-            Color previewColor = Color.white;
-            previewColor.a = 0.3f;
+            // Draw circles to represent the brush area - draw multiple circles for better visibility
+            Vector3 centerWorld = center.ToVector3Shifted();
             
-            Rect previewRect = new Rect(
-                screenPos1.x, 
-                screenPos1.y, 
-                screenPos2.x - screenPos1.x, 
-                screenPos2.y - screenPos1.y
-            );
-
-            // Use DevGUI to draw the preview box
-            GUI.color = previewColor;
-            DevGUI.DrawBox(previewRect, 2);
-            GUI.color = Color.white;
+            // Draw the outer circle
+            GenDraw.DrawCircleOutline(centerWorld, radius, SimpleColor.White);
+            
+            // Draw a smaller inner circle for better visibility
+            if (radius > 1f)
+            {
+                GenDraw.DrawCircleOutline(centerWorld, radius * 0.7f, SimpleColor.White);
+            }
+            
+            // Also draw individual cell previews for affected cells
+            int searchRadius = Mathf.CeilToInt(radius);
+            for (int x = -searchRadius; x <= searchRadius; x++)
+            {
+                for (int z = -searchRadius; z <= searchRadius; z++)
+                {
+                    IntVec3 cell = center + new IntVec3(x, 0, z);
+                    
+                    // Check if the cell is within the circular radius
+                    float distance = Mathf.Sqrt(x * x + z * z);
+                    if (distance <= radius && cell.InBounds(map))
+                    {
+                        // Draw a subtle highlight on each affected cell
+                        Vector3 cellCenter = cell.ToVector3Shifted();
+                        GenDraw.DrawTargetHighlight(new LocalTargetInfo(cell));
+                    }
+                }
+            }
         }
     }
 }
