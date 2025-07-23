@@ -5,7 +5,7 @@
     <supportedVersions>
         <li>1.6</li>
     </supportedVersions>
-    <modVersion>2.0.0</modVersion>
+    <modVersion>2.0.2</modVersion>
     <packageId>BrushTool.programmerLily.com</packageId>
     <modDependencies>
     </modDependencies>
@@ -50,4 +50,5 @@ Usage:
 7. For fill tools: Click on any terrain area to flood fill all connected cells of the same type
 
 The spray paint tools apply terrain randomly to a percentage of cells within the brush radius. Fill tools use flood fill algorithm to change all connected cells of the same terrain type (limited to 10,000 cells for performance). Preview is shown for areas under 500 cells to keep visualization responsive. Line tools use a two-click interface for precise straight-line drawing. The Edge Blender tools automatically detect terrain boundaries and create smooth transitions by intelligently blending different terrain types based on surrounding context.</description>
+<url>https://github.com/sam2332/Rimworld-BrushTool</url>
 </ModMetaData>

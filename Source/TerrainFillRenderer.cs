@@ -7,7 +7,7 @@ namespace Verse
 {
     public static class TerrainFillRenderer
     {
-        private const int MAX_PREVIEW_CELLS = 500;
+        private const int MAX_PREVIEW_CELLS = 10000;
         
         public static void RenderFillPreview(IntVec3 position, TerrainDef targetTerrain)
         {
