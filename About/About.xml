@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+    <name>Quick Terrain Brush Tool</name>
+    <author>ProgrammerLily</author>
+    <supportedVersions>
+        <li>1.6</li>
+    </supportedVersions>
+    <modVersion>1.0.0</modVersion>
+    <packageId>BrushTool.programmerLily.com</packageId>
+    <modDependencies>
+    </modDependencies>
+    <description>Adds five developer brush tools to the Dev Palette that apply terrain in square areas of fixed size (4×4, 8×8, 16×16, 32×32, 64×64).
+
+This mod extends the existing terrain rectangle tool with preset square brushes centered on the clicked tile. Perfect for rapid terrain prototyping and map design.
+
+Features:
+• Five brush sizes: 4x4, 8x8, 16x16, 32x32, 64x64
+• Reuses existing terrain selection UI
+• Cached terrain selection across brush sizes
+• Visual brush preview under mouse cursor
+• Integrated into Dev Palette under "Terrain" category
+
+Usage:
+1. Open the Debug Menu (Development mode required)
+2. Navigate to Terrain category
+3. Select desired brush size
+4. Choose terrain type (cached for subsequent uses)
+5. Click on map to paint terrain
+
+The terrain selection is remembered across all brush sizes until cleared or changed, making it easy to paint with different sizes using the same terrain type.</description>
+</ModMetaData>
