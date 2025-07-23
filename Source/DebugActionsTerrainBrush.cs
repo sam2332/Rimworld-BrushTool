@@ -15,6 +15,20 @@ namespace Verse
         private static TerrainDef currentTerrain = null;
         private static float currentBrushRadius = 0f;
         
+        
+        
+        [DebugAction("Map", "Terrain brush (single)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static List<DebugActionNode> TerrainBrushRadiusSingle()
+        {
+            return CreateTerrainBrushNodes(0f);
+        }
+
+        [DebugAction("Map", "Terrain brush (radius 1)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static List<DebugActionNode> TerrainBrushRadius1()
+        {
+            return CreateTerrainBrushNodes(1.0f);
+        }
+        
         [DebugAction("Map", "Terrain brush (radius 2)", false, false, false, false, false, 91, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static List<DebugActionNode> TerrainBrushRadius2()
         {
