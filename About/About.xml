@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-    <name>Quick Paint Terrain Brush Dev Tool</name>
+    <name>[PL] Quick Paint Terrain Brush Dev Tool</name>
     <author>ProgrammerLily</author>
     <supportedVersions>
         <li>1.6</li>
     </supportedVersions>
-    <modVersion>2.2.2</modVersion>
+    <modVersion>2.2.4</modVersion>
     <packageId>BrushTool.programmerLily.com</packageId>
     <modDependencies>
     </modDependencies>
